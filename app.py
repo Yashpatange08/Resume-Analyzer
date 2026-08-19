@@ -79,3 +79,12 @@ def remove_stopwords(text):
     words = word_tokenize(text)
     filtered_words = [word for word in words if word.lower() not in stop_words]
     return " ".join(filtered_words) 
+
+
+def calculate_similarities(resume_text,job_description):
+    resume_preoceed = remove_stopwords(clean_text(resume_text))
+    job_description = remove_stopwords(clean_text(resume_text))
+    vectorizer = TfidfVectorizer()
+    Tfid_matrix = vectorizer.fit_transform([resume_preoceed,job_description])
+    score =cosine_similarity(Tfid_matrix[0:1]Tfid_matrix[1:2][0][0]*100)
+    return round(score,2),resume_preoceed,job_description
