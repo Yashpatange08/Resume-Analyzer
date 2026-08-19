@@ -154,5 +154,3 @@ def main():
                 else:
                     st.success("Excellent Match! Your resume strongly aligns.")
 
-if __name__ == "__main__":
-    main()
