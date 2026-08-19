@@ -1,3 +1,5 @@
+from pydoc import pager
+
 import streamlit as st
 import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -29,3 +31,43 @@ This Tool uses **TF-IDF + Cosine similarity+ Some Special BreakPoints** to Analy
 
 with st.sidebar:
     st.header("About")
+    st.info("""
+    This  Tool Helps You:
+    - Measure how your resume  matches a job Description
+    - Identify Important Aspect
+    - Improve Your Resume Based Upon Missing terms
+""")
+    st.header("How It Works")
+    st.write("""
+    This  Tool Helps You:
+
+    1. Upload Your Resume (PDF)
+
+    2. Tell Us Your Job Description
+
+    3. Click **Analyze Resume**
+
+    4. Review **Score** & **Suggestions**
+    5
+""")
+
+# ----------------------------Helper-----------------------------------
+
+#Extracting text from pdf Function
+def extract_text(uploaded_file):
+    try:
+        pdf_reader = PyPDF2.PdfReader(uploaded_file)
+        text = ""
+        for text in pdf_reader.pages:
+            text = text+pager.extract_text()
+            return text
+    except Exception as e:
+        st.error(f"Error While reading PDF: {e}")
+        return ""
+
+
+def clean_text(text):
+    text = text.lower()
+    text = re.sub(r"[^a-zA-Z\s]",'',text)
+    text = re.sub(r"\s+",'',text).strip()
+    return text
