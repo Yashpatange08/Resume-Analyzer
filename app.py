@@ -65,10 +65,17 @@ def extract_text(uploaded_file):
         st.error(f"Error While reading PDF: {e}")
         return ""
 
-
+# Text Cleaning
 def clean_text(text):
     text = text.lower()
     text = re.sub(r"[^a-zA-Z\s]",'',text) # all the letter between a-z and A-Z only remains others will be removed completely
     text = re.sub(r"\s+",'',text).strip() #used to remove or strip white SPaces from text
     return text
 
+
+# Removing Stopwords
+def remove_stopwords(text):
+    stop_words = set(stopwords.words('english'))
+    words = word_tokenize(text)
+    filtered_words = [word for word in words if word.lower() not in stop_words]
+    return " ".join(filtered_words) 
