@@ -68,6 +68,7 @@ def extract_text(uploaded_file):
 
 def clean_text(text):
     text = text.lower()
-    text = re.sub(r"[^a-zA-Z\s]",'',text)
-    text = re.sub(r"\s+",'',text).strip()
+    text = re.sub(r"[^a-zA-Z\s]",'',text) # all the letter between a-z and A-Z only remains others will be removed completely
+    text = re.sub(r"\s+",'',text).strip() #used to remove or strip white SPaces from text
     return text
+
