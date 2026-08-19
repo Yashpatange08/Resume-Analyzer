@@ -86,5 +86,13 @@ def calculate_similarities(resume_text,job_description):
     job_description = remove_stopwords(clean_text(resume_text))
     vectorizer = TfidfVectorizer()
     Tfid_matrix = vectorizer.fit_transform([resume_preoceed,job_description])
-    score =cosine_similarity(Tfid_matrix[0:1]Tfid_matrix[1:2][0][0]*100)
+    score =cosine_similarity(Tfid_matrix[0:1],Tfid_matrix[1:2][0][0]*100)
     return round(score,2),resume_preoceed,job_description
+
+def extract_keywords(text,num_keyword=100):
+    words = word_tokenize(text)
+    words = [w for w in words if len(w)>2]
+    tagged_words = pos_tag(words)
+    nouns = [w for w ,pos in tagged_words if pos.startswith("NN") or pos.startswith("JJ")]
+    word_freq = Counter(nouns)
+    return words.freq.most_common(num_keyword)
